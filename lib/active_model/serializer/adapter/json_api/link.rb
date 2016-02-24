@@ -1,11 +1,14 @@
+require 'active_model_serializers/helpers'
+
 module ActiveModel
   class Serializer
     module Adapter
       class JsonApi
         class Link
-          def initialize(serializer, value)
+          def initialize(serializer, value, options)
             @object = serializer.object
             @scope = serializer.scope
+            @context = options[:serialization_context]
 
             # Use the return value of the block unless it is nil.
             if value.respond_to?(:call)

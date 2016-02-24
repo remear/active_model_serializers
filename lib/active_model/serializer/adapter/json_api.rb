@@ -56,7 +56,7 @@ module ActiveModel
 
           is_collection = serializer.respond_to?(:each)
           serializers = is_collection ? serializer : [serializer]
-          primary_data, included = resource_objects_for(serializers)
+          primary_data, included = resource_objects_for(serializers, options)
 
           hash = {}
           hash[:data] = is_collection ? primary_data : primary_data[0]
@@ -88,21 +88,21 @@ module ActiveModel
 
         private
 
-        def resource_objects_for(serializers)
+        def resource_objects_for(serializers, options)
           @primary = []
           @included = []
           @resource_identifiers = Set.new
-          serializers.each { |serializer| process_resource(serializer, true) }
+          serializers.each { |serializer| process_resource(serializer, true, options) }
           serializers.each { |serializer| process_relationships(serializer, @include_tree) }
 
           [@primary, @included]
         end
 
-        def process_resource(serializer, primary)
+        def process_resource(serializer, primary, options)
           resource_identifier = ApiObjects::ResourceIdentifier.new(serializer).as_json
           return false unless @resource_identifiers.add?(resource_identifier)
 
-          resource_object = resource_object_for(serializer)
+          resource_object = resource_object_for(serializer, options)
           if primary
             @primary << resource_object
           else
@@ -133,7 +133,7 @@ module ActiveModel
           serializer.attributes(fields).except(:id)
         end
 
-        def resource_object_for(serializer)
+        def resource_object_for(serializer, options)
           resource_object = cache_check(serializer) do
             resource_object = ApiObjects::ResourceIdentifier.new(serializer).as_json
 
@@ -147,7 +147,7 @@ module ActiveModel
           relationships = relationships_for(serializer, requested_associations)
           resource_object[:relationships] = relationships if relationships.any?
 
-          links = links_for(serializer)
+          links = links_for(serializer, options)
           resource_object[:links] = links if links.any?
 
           meta = meta_for(serializer)
@@ -169,9 +169,9 @@ module ActiveModel
           end
         end
 
-        def links_for(serializer)
+        def links_for(serializer, options)
           serializer._links.each_with_object({}) do |(name, value), hash|
-            hash[name] = Link.new(serializer, value).as_json
+            hash[name] = Link.new(serializer, value, options).as_json
           end
         end
 
