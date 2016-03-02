@@ -10,15 +10,21 @@ module ActiveModelSerializers
             href "//example.com/link_author/#{object.id}"
             meta stuff: 'value'
           end
-
+          link(:author) { link_author_url(object.id) }
+          link(:link_authors) { link_authors_url }
           link :other, '//example.com/resource'
-
+          link(:posts) { link_author_posts_url(object.id) }
           link :yet_another do
             "//example.com/resource/#{object.id}"
           end
         end
 
         def setup
+          Rails.application.routes.draw do
+            resources :link_authors do
+              resources :posts
+            end
+          end
           @post = Post.new(id: 1337, comments: [], author: nil)
           @author = LinkAuthor.new(id: 1337, posts: [@post])
         end
@@ -73,7 +79,10 @@ module ActiveModelSerializers
                 stuff: 'value'
               }
             },
+            author: 'http://example.com/link_authors/1337',
+            link_authors: 'http://example.com/link_authors',
             other: '//example.com/resource',
+            posts: 'http://example.com/link_authors/1337/posts',
             yet_another: '//example.com/resource/1337'
           }
           assert_equal(expected, hash[:data][:links])

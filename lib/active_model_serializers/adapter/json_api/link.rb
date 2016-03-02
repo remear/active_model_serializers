@@ -1,7 +1,11 @@
+require 'active_model_serializers/support'
+
 module ActiveModelSerializers
   module Adapter
     class JsonApi
       class Link
+        include ActiveModelSerializers::Support::UrlHelpers
+
         def initialize(serializer, value)
           @object = serializer.object
           @scope = serializer.scope

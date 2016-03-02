@@ -1,3 +1,5 @@
+require 'action_mailer/railtie'
+
 class ActiveModelSerializers::RailsApplication < Rails::Application
   if Rails::VERSION::MAJOR >= 4
     config.eager_load = false
@@ -7,6 +9,8 @@ class ActiveModelSerializers::RailsApplication < Rails::Application
     config.active_support.test_order = :random
 
     config.logger = Logger.new(nil)
+
+    config.action_mailer.default_url_options = { host: 'example.com' }
 
     config.action_controller.perform_caching = true
     ActionController::Base.cache_store = :memory_store

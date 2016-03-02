@@ -15,6 +15,11 @@ module ActiveModelSerializers
       end
     end
 
+    initializer 'active_model_serializers.support' do
+      require 'active_model_serializers/support/rails/url_helpers'
+      ActiveModelSerializers::Support::UrlHelpers.include ActiveModelSerializers::Support::UrlHelpers::Rails
+    end
+
     # This hook is run after the action_controller railtie has set the configuration
     # based on the *environment* configuration and before any config/initializers are run
     # and also before eager_loading (if enabled).

@@ -103,7 +103,7 @@ PR please :)
 
 #### links
 
-##### How to add top-level links
+##### Top-level
 
 JsonApi supports a [links object](http://jsonapi.org/format/#document-links) to be specified at top-level, that you can specify in the `render`:
 
@@ -143,6 +143,32 @@ That's the result:
 ```
 
 This feature is specific to JsonApi, so you have to use the use the [JsonApi Adapter](adapters.md#jsonapi)
+
+
+##### Resource-level
+
+In your serializer, define each link in one of the following methods:
+
+As a static string
+
+```ruby
+link :link_name, 'https://example.com/resource'
+```
+
+As a block to be evaluated. When using Rails, URL helpers are available.
+
+```ruby
+link :link_name_ do
+  "https://example.com/resource/#{object.id}"
+end
+
+link(:link_name) { "https://example.com/resource/#{object.id}" }
+
+link(:link_name) { "https://example.com/resource/#{object.id}" }
+
+link(:link_name) { resource_url(object) }
+
+```
 
 ### serializer_opts
 
