@@ -17,7 +17,6 @@ if version == 'master'
     gem 'activesupport'
     gem 'activemodel'
     gem 'actionpack'
-    gem 'actionmailer', group: :test
     gem 'activerecord', group: :test
     # Rails 5
     gem 'actionview'
@@ -28,7 +27,6 @@ else
   gem 'activesupport', gem_version
   gem 'activemodel', gem_version
   gem 'actionpack', gem_version
-  gem 'actionmailer', gem_version, group: :test
   gem 'activerecord', gem_version, group: :test
 end
 

@@ -164,8 +164,6 @@ end
 
 link(:link_name) { "https://example.com/resource/#{object.id}" }
 
-link(:link_name) { "https://example.com/resource/#{object.id}" }
-
 link(:link_name) { resource_url(object) }
 
 ```

@@ -1,5 +1,9 @@
 module ActiveModelSerializers
   class SerializationContext
+    class << self
+      attr_accessor :url_helpers, :default_url_options
+    end
+
     attr_reader :request_url, :query_parameters
 
     def initialize(request)

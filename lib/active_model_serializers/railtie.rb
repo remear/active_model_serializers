@@ -15,9 +15,9 @@ module ActiveModelSerializers
       end
     end
 
-    initializer 'active_model_serializers.support' do
-      require 'active_model_serializers/support/rails/url_helpers'
-      ActiveModelSerializers::Support::UrlHelpers.include ActiveModelSerializers::Support::UrlHelpers::Rails
+    initializer 'active_model_serializers.prepare_serialization_context' do
+      SerializationContext.url_helpers = Rails.application.routes.url_helpers
+      SerializationContext.default_url_options = Rails.application.routes.default_url_options
     end
 
     # This hook is run after the action_controller railtie has set the configuration
