@@ -3,6 +3,8 @@
 Breaking changes:
 
 Features:
+- [#1550](https://github.com/rails-api/active_model_serializers/pull/1550) Add
+  Rails url_helpers to `SerializationContext` for use in links. (@remear)
 - [#1515](https://github.com/rails-api/active_model_serializers/pull/1515) Adds support for symbols to the
   `ActiveModel::Serializer.type` method. (@groyoh)
 - [#1504](https://github.com/rails-api/active_model_serializers/pull/1504) Adds the changes missing from #1454
