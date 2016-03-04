@@ -103,6 +103,9 @@ PR please :)
 
 #### links
 
+If you wish to use Rails url helpers for link generation, e.g., `link(:resources) { resources_url }`, ensure your application sets
+`Rails.application.routes.default_url_options`.
+
 ##### Top-level
 
 JsonApi supports a [links object](http://jsonapi.org/format/#document-links) to be specified at top-level, that you can specify in the `render`:
@@ -156,6 +159,7 @@ link :link_name, 'https://example.com/resource'
 ```
 
 As a block to be evaluated. When using Rails, URL helpers are available.
+Ensure your application sets `Rails.application.routes.default_url_options`.
 
 ```ruby
 link :link_name_ do
