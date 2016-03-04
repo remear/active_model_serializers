@@ -170,6 +170,8 @@ link(:link_name) { "https://example.com/resource/#{object.id}" }
 
 link(:link_name) { resource_url(object) }
 
+link(:link_name) { url_for(controller: 'controller_name', action: 'index', only_path: false) }
+
 ```
 
 ### serializer_opts
