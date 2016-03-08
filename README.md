@@ -3,7 +3,7 @@
 ##### Build Status
 
 [![Build Status](https://travis-ci.org/rails-api/active_model_serializers.svg?branch=master)](https://travis-ci.org/rails-api/active_model_serializers)
-[![Build status](https://ci.appveyor.com/api/projects/status/x6xdjydutm54gvyt/branch/master?svg=true)](https://ci.appveyor.com/project/joaomdmoura/active-model-serializers/branch/master) |
+[![Build status](https://ci.appveyor.com/api/projects/status/x6xdjydutm54gvyt/branch/master?svg=true)](https://ci.appveyor.com/project/joaomdmoura/active-model-serializers/branch/master)
 
 ##### Code Quality
 
