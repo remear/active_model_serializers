@@ -47,6 +47,8 @@ module ActiveModelSerializers
         def initialize(serializer, value)
           @object = serializer.object
           @scope = serializer.scope
+          @href = nil
+          @meta = nil
 
           # Use the return value of the block unless it is nil.
           if value.respond_to?(:call)
